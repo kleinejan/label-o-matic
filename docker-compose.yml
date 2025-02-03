@@ -1,7 +1,5 @@
 version: '3.8'
 
-
-
 services:
   app:
     build: .
@@ -22,11 +20,12 @@ services:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
     depends_on:
-      - app
+      - app  # ✅ Correct format
+
   certbot:
     image: certbot/certbot
     volumes:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
     depends_on:
-      - nginx
+      - nginx  # ✅ Correct format
