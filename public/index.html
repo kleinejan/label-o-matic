@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Label•O•Matic – Create Custom 3D-Printed Labels & Cards</title>
+    <meta name="description" content="Instantly create customizable 3D-printed labels, nameplates, and keychains with our free OpenSCAD-powered generator. Download STL files in seconds!">
+    <meta name="keywords" content="3D printed labels, nameplates, keychains, OpenSCAD, STL generator">
+    <meta name="robots" content="index, follow">
+
+    <!-- OpenGraph for Social Media -->
+    <meta property="og:title" content="Label•O•Matic – Free Custom 3D Label Generator">
+    <meta property="og:description" content="Design & personalize 3D-printed nameplates and keychains. Download STL files instantly. No software needed!">
+    <meta property="og:image" content="https://yourwebsite.com/preview-image.png">
+    <meta property="og:url" content="https://yourwebsite.com">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<noscript>
+    <h1>Free Custom 3D Label Generator</h1>
+    <p>Instantly create and download customizable STL files for 3D printing. Use our online OpenSCAD tool to generate nameplates, labels, and keychains.</p>
+</noscript>
+<header>
+    <h1>Label•O•Matic <span>Powered by <a href="https://openscad.org/">OpenScad</a></span></h1>
+    <nav>
+        <ul>
+            <ul>
+                <li><a href="index.html">Tool</a></li>
+                <li><a href="howto.html">Howto print</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="https://www.paypal.com/donate/?hosted_button_id=VR94Y3FQTDDEW">Support me!</a><span
+                        style="line-height: 0"> ❤️</span></li>
+            </ul>
+        </ul>
+    </nav>
+</header>
+<noscript>
+    <h1>Free Custom 3D Label Generator</h1>
+    <p>Instantly create and download customizable STL files for 3D printing. Use our online OpenSCAD tool to generate nameplates, labels, and keychains.</p>
+</noscript>
+<div class="container container--tool">
+
+    <section class="form-card">
+        <form class="form-block" id="cardForm">
+            <div class="text-block">
+                <a name="tool"></a>
+                <fieldset class="janneman">
+                    <legend class="c-heading--h3">Card Presets</legend>
+                    <span class="c-form-item">
+            <label for="preset">Choose a preset:</label>
+            <select id="preset">
+                <option selected disabled>Default</option>
+                <option value="systainer">Systainer Card</option>
+                <option value="miniSystainer">Mini Systainer Card</option>
+                <option value="keyChain">key Chain</option>
+                 <option value="roundedCard">Rounded card</option>
+                <option value="custom">Custom (Adjust Below)</option>
+            </select>
+            </span>
+                </fieldset>
+            </div>
+            <div class="text-block">
+                <fieldset id="textFields" class="janneman">
+                    <legend class="c-heading--h3">Text Lines</legend>
+                    <div class="text-line">
+                <span class="c-form-item">
+                    <label for="text">Text:</label>
+                    <input type="text" name="text[]" placeholder="Enter text" value="Yes it worked!">
+                </span>
+                        <span class="c-form-item">
+                    <label for="fontSize">Font Size:</label>
+                    <input type="number" name="fontSize[]" placeholder="Font size" value="10" step="0.1">
+                </span>
+                        <span class="c-form-item">
+                    <label for="fontType">Font Type:</label>
+                    <select name="fontType[]" id="fontType">
+                        <option value="AVHershey Simplex:style=Heavy">Bold</option>
+                        <option value="AVHershey Simplex:style=Medium">Medium</option>
+                        <option value="AVHershey Simplex:style=Light">Light</option>
+                        <option value="BrailleCc0">Braille</option>
+                    </select>
+                </span>
+                    </div>
+                </fieldset>
+
+                <button type="button" id="addTextLine" class="c-button c-button--add">&plus; Add Text Line</button>
+            </div>
+            <details class="text-block">
+                <summary class="c-heading--h3">Card dimensions</summary>
+                <fieldset class="jan">
+                    <legend class="visually-hidden">Card dimensions</legend>
+                    <span class="c-form-item">
+                    <label for="cardWidth">Width (mm):</label>
+                    <input class="char-4" type="number" id="cardWidth" name="cardWidth" value="84.3" step="0.1"
+                           placeholder="Enter card width">
+                </span>
+                    <span class="c-form-item">
+                    <label for="cardHeight">Height (mm):</label>
+                    <input type="number" id="cardHeight" name="cardHeight" value="54.4" step="0.1"
+                           placeholder="Enter card height">
+                </span>
+                    <span class="c-form-item">
+                <label for="cardThickness">Thickness (mm):</label>
+                <input type="number" id="cardThickness" name="cardThickness" value="1.4" step="0.1"
+                       placeholder="Enter card thickness">
+                </span>
+                    <span class="c-form-item">
+                <label for="radius">Corner Radius (mm):</label>
+                <input type="number" id="radius" name="radius" value="2" step="0.1" placeholder="Enter corner radius">
+                </span>
+                </fieldset>
+            </details>
+
+            <details class="text-block">
+                <summary class="c-heading--h3">Border</summary>
+                <fieldset class="jan">
+                    <legend class="visually-hidden">Border Dimensions</legend>
+                    <span class="c-form-item">
+                <label for="cardBorderThickness">Width (mm):</label>
+                <input type="number" id="cardBorderThickness" name="cardBorderThickness" value="1.5" step="0.1" min="0"
+                       placeholder="Enter border thickness">
+                </span>
+                    <span class="c-form-item">
+                <label for="cardBorderOffset">Offset (mm):</label>
+                <input type="number" id="cardBorderOffset" name="cardBorderOffset" value="1.4" step="0.1" min="0"
+                       placeholder="Enter border offset">
+                </span>
+
+                    <span class="c-form-item">
+                    <label for="bevel">Thickness (mm):</label>
+                    <input aria-describedby="s_bevel" type="number" id="bevel" name="bevel" value=".6" step="0.1"
+                           placeholder="Enter bevel height">
+                    <span id="s_bevel">Height of the text and border</span>
+                </span>
+                    <span class="c-form-item">
+                <label for="lineHeight">Line Height:</label>
+                <input type="number" id="lineHeight" name="lineHeight" value="1" step="0.1"
+                       placeholder="Enter line height">
+                </span>
+                </fieldset>
+            </details>
+            <details class="text-block">
+                <summary class="c-heading--h3">Keychain</summary>
+                <fieldset class="jan">
+                    <legend class="visually-hidden">Misc Dimensions</legend>
+
+                    <span class="c-form-item">
+                <label for="keyChainPosition">Lip Position</label>
+                <select name="keyChainPosition" id="keyChainPosition">
+                    <option value="">No lip</option>
+                    <option value="top">Top</option>
+                    <option value="right">Right</option>
+                    <option value="bottom">Bottom</option>
+                    <option value="left">Left</option>
+                </select>
+                <span>The place where you want the keychain attachment.</span>
+                </span>
+                    <span class="c-form-item">
+                <label for="keyChainHole">Hole (mm):</label>
+                <input type="number" id="keyChainHole" name="keyChainHole" value="5" step="0.1"
+                       placeholder="Key chain hole">
+                <span>Size of the keychain hole</span>
+                </span>
+                </fieldset>
+            </details>
+
+
+            <button type="button" class="c-button c-button--preview" id="previewButton">Generate Previews</button>
+            <button type="submit" class="c-button c-button--generate">Generate STL</button>
+
+        </form>
+    </section>
+    <div id="loader" style="display: none;">
+        <p>Processing your request...</p>
+    </div>
+    <div class="preview-card" id="preview">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const textFieldsContainer = document.getElementById("textFields");
+
+        const inputs = document.querySelectorAll("#cardForm input, #cardForm select");
+
+        // Initialize preview on page load
+
+
+        const presets = {
+            systainer: {
+                cardWidth: 84.3,
+                cardHeight: 54.4,
+                cardThickness: 1.4,
+                cardBorderOffset: 3,
+                cardBorderThickness: 1.5,
+                keyChainHole: 5,
+                keyChainPosition: '',
+                radius: 2,
+                bevel: 0.6,
+                lineHeight: 1,
+                textLines: [
+                    ["Systainer Label", 10, "AVHershey Simplex:style=Heavy"],
+                    ["Your Name", 10, "AVHershey Simplex:style=Medium"],
+                    ["Company Logo", 10, "AVHershey Simplex:style=Medium"]
+                ]
+            },
+            miniSystainer: {
+                cardWidth: 54,
+                cardHeight: 35,
+                cardThickness: 1.2,
+                cardBorderOffset: 2,
+                cardBorderThickness: 1,
+                keyChainHole: 5,
+                keyChainPosition: '',
+                radius: 1.5,
+                bevel: 0.5,
+                lineHeight: 1,
+                textLines: [
+                    ["Mini Tag", 10, "AVHershey Simplex:style=Heavy"],
+                    ["Label Here", 8, "AVHershey Simplex:style=Medium"]
+                ]
+            },
+            keyChain: {
+                cardWidth: 54,
+                cardHeight: 35,
+                cardThickness: 1.2,
+                cardBorderOffset: 0,
+                cardBorderThickness: 1,
+                radius: 1.5,
+                bevel: 0.5,
+                keyChainHole: 5,
+                keyChainPosition: 'left',
+                lineHeight: 1,
+                textLines: [
+                    ["Keychain", 10, "AVHershey Simplex:style=Heavy"],
+                    ["Left Lip", 8, "AVHershey Simplex:style=Medium"]
+                ]
+            },
+            roundedCard: {
+                cardWidth: 54.3,
+                cardHeight: 54.4,
+                cardThickness: 1.4,
+                cardBorderOffset: 0,
+                cardBorderThickness: 4,
+                keyChainHole: 5,
+                keyChainPosition: '',
+                radius: 10,
+                bevel: 1,
+                lineHeight: 1,
+                textLines: [
+                    ["Rounded", 10, "AVHershey Simplex:style=Heavy"],
+                    ["CopsSaw", 8, "AVHershey Simplex:style=Medium"]
+                ]
+            },
+            custom: {} // Custom values (adjustable by user)
+        };
+
+        document.getElementById("preset").addEventListener("change", (e) => {
+            const selectedPreset = presets[e.target.value];
+            if (selectedPreset) {
+                document.getElementById("cardWidth").value = selectedPreset.cardWidth || "";
+                document.getElementById("cardHeight").value = selectedPreset.cardHeight || "";
+                document.getElementById("keyChainHole").value = selectedPreset.keyChainHole || "";
+                document.getElementById("keyChainPosition").value = selectedPreset.keyChainPosition || "";
+                document.getElementById("cardThickness").value = selectedPreset.cardThickness || "";
+                document.getElementById("cardBorderOffset").value = selectedPreset.cardBorderOffset || "";
+                document.getElementById("cardBorderThickness").value = selectedPreset.cardBorderThickness || "";
+                document.getElementById("radius").value = selectedPreset.radius || "";
+                document.getElementById("bevel").value = selectedPreset.bevel || "";
+                document.getElementById("lineHeight").value = selectedPreset.lineHeight || "";
+
+                // Clear existing text lines
+                const textFieldsContainer = document.getElementById("textFields");
+                textFieldsContainer.innerHTML = ""; // Remove old text fields
+
+                // Populate new text fields from preset
+                selectedPreset.textLines?.forEach((line, index) => {
+                    const newLine = document.createElement("div");
+                    newLine.className = "text-line";
+
+                    newLine.innerHTML = `
+            <span class="c-form-item">
+                <label for="preset-text-${index}">Text:</label>
+                <input type="text" id="preset-text-${index}" name="text[]" value="${line[0]}" placeholder="Enter text">
+            </span>
+            <span class="c-form-item">
+                <label for="preset-fontSize-${index}">Font Size:</label>
+                <input type="number" id="preset-fontSize-${index}" name="fontSize[]" value="${line[1]}" step="0.1">
+            </span>
+            <span class="c-form-item">
+                <label for="preset-fontType-${index}">Font Type:</label>
+                <select id="preset-fontType-${index}" name="fontType[]">
+                    <option value="AVHershey Simplex:style=Heavy" ${line[2] === "AVHershey Simplex:style=Heavy" ? "selected" : ""}>Bold</option>
+                    <option value="AVHershey Simplex:style=Medium" ${line[2] === "AVHershey Simplex:style=Medium" ? "selected" : ""}>Medium</option>
+                    <option value="AVHershey Simplex:style=Light" ${line[2] === "AVHershey Simplex:style=Light" ? "selected" : ""}>Light</option>
+                    <option value="BrailleCc0" ${line[2] === "BrailleCc0" ? "selected" : ""}>Braille</option>
+                </select>
+            </span>
+            <button type="button" class="c-button c-button--delete">Delete</button>
+            `;
+
+                    textFieldsContainer.appendChild(newLine);
+
+                    // Add delete event listener
+                    newLine.querySelector(".c-button--delete").addEventListener("click", () => {
+                        newLine.remove();
+                    });
+                });
+            }
+        });
+
+
+
+        let textLineCounter = 0; // Counter to generate unique IDs
+
+        document.getElementById("addTextLine").addEventListener("click", () => {
+            const textFieldsContainer = document.getElementById("textFields");
+            textLineCounter++; // Increment the counter for a new text line
+
+            const uniqueId = `textLine-${textLineCounter}`;
+            const newLine = document.createElement("div");
+            newLine.className = "text-line";
+
+            newLine.innerHTML = `
+<span class="c-form-item">
+        <label for="${uniqueId}-text">Text:</label>
+        <input type="text" id="${uniqueId}-text" name="text[]" placeholder="Enter text">
+</span>
+<span class="c-form-item">
+        <label for="${uniqueId}-fontSize">Font Size:</label>
+        <input type="number" id="${uniqueId}-fontSize" name="fontSize[]" placeholder="Font size" value="12">
+</span>
+<span class="c-form-item">
+        <label for="${uniqueId}-fontType">Font Type:</label>
+        <select id="${uniqueId}-fontType" name="fontType[]">
+            <option value="AVHershey Simplex:style=Heavy">Bold</option>
+            <option value="AVHershey Simplex:style=Medium">Medium</option>
+            <option value="AVHershey Simplex:style=Light">Light</option>
+            <option value="BrailleCc0">Braille</option>
+        </select>
+</span>
+
+        <button type="button" class="c-button c-button--delete">Delete</button>
+    `;
+
+            textFieldsContainer.appendChild(newLine);
+
+            // Add event listener for delete button
+            const deleteButton = newLine.querySelector(".c-button--delete");
+            deleteButton.addEventListener("click", () => {
+                newLine.remove();
+            });
+        });
+
+
+        // Add delete functionality to existing text lines
+        document.querySelectorAll(".text-line").forEach((line) => {
+            const deleteButton = document.createElement("button");
+            deleteButton.type = "button";
+            deleteButton.className = "c-button c-button--delete";
+            deleteButton.textContent = "Delete";
+
+            line.appendChild(deleteButton);
+
+            deleteButton.addEventListener("click", () => {
+                line.remove();
+            });
+        });
+
+        const loader = document.getElementById("loader");
+        // Handle form submission
+        document.getElementById("cardForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+
+            const cardData = {
+                cardWidth: parseFloat(formData.get("cardWidth")),
+                cardHeight: parseFloat(formData.get("cardHeight")),
+                cardThickness: parseFloat(formData.get("cardThickness")),
+                keyChainHole: parseFloat(formData.get("keyChainHole")),
+                keyChainPosition: parseFloat(formData.get("keyChainPosition")),
+                radius: parseFloat(formData.get("radius")),
+                cardBorderThickness: parseFloat(formData.get("cardBorderThickness")),
+                cardBorderOffset: parseFloat(formData.get("cardBorderOffset")),
+                bevel: parseFloat(formData.get("bevel")),
+                lineHeight: parseFloat(formData.get("lineHeight")),
+                textLines: []
+            };
+
+            const textValues = formData.getAll("text[]");
+            const fontSizes = formData.getAll("fontSize[]").map(Number);
+            const fontTypes = formData.getAll("fontType[]");
+
+            for (let i = 0; i < textValues.length; i++) {
+                if (textValues[i].trim() !== "") {
+                    cardData.textLines.push([textValues[i], fontSizes[i], fontTypes[i]]);
+                }
+            }
+
+            // Show the loader
+            loader.style.display = "block";
+
+            try {
+                const response = await fetch("/generate", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(cardData),
+                });
+
+                if (response.ok) {
+                    const {fileUrl} = await response.json();
+
+                    // Hide the loader
+                    loader.style.display = "none";
+
+                    // Trigger file download
+                    const a = document.createElement("a");
+                    a.href = fileUrl;
+                    a.download = "custom_card.stl";
+                    a.click();
+                } else {
+                    loader.style.display = "none";
+                    alert("Failed to generate STL.");
+                }
+            } catch (error) {
+                loader.style.display = "none";
+                alert("An error occurred. Please try again.");
+                console.error(error);
+            }
+        });
+
+        document.getElementById("previewButton").addEventListener("click", async () => {
+            const formData = new FormData(document.getElementById("cardForm"));
+
+            const cardData = {
+                cardWidth: parseFloat(formData.get("cardWidth")),
+                cardHeight: parseFloat(formData.get("cardHeight")),
+                cardThickness: parseFloat(formData.get("cardThickness")),
+                keyChainHole: parseFloat(formData.get("keyChainHole")),
+                keyChainPosition: formData.get("keyChainPosition"),
+                radius: parseFloat(formData.get("radius")),
+                cardBorderOffset: parseFloat(formData.get('cardBorderOffset')),
+                cardBorderThickness: parseFloat(formData.get('cardBorderThickness')),
+                bevel: parseFloat(formData.get("bevel")),
+                lineHeight: parseFloat(formData.get("lineHeight")),
+                textLines: [],
+                mode: "png", // Request PNG generation
+            };
+
+            const textValues = formData.getAll("text[]");
+            const fontSizes = formData.getAll("fontSize[]").map(Number);
+            const fontTypes = formData.getAll("fontType[]");
+
+            for (let i = 0; i < textValues.length; i++) {
+                if (textValues[i].trim() !== "") {
+                    cardData.textLines.push([textValues[i], fontSizes[i], fontTypes[i]]);
+                }
+            }
+
+            try {
+                const response = await fetch("/generate", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(cardData),
+                });
+
+                if (response.ok) {
+                    const {fileUrls} = await response.json();
+                    const preview = document.getElementById("preview");
+                    preview.innerHTML = fileUrls
+                        .map((url) => `<img src="${url}" alt="Preview of your card">`)
+                        .join("");
+                } else {
+                    alert("Failed to generate previews.");
+                }
+            } catch (error) {
+                alert("An error occurred. Please try again.");
+                console.error(error);
+            }
+        });
+
+
+    });
+</script>
+
+
+</body>
+</html>
