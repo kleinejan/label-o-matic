@@ -7,8 +7,6 @@ services:
       - "3000:3000"  # Internal app port
     environment:
       - NODE_ENV=production
-    depends_on:
-      - nginx
 
   nginx:
     image: nginx:latest
