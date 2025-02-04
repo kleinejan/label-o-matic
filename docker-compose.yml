@@ -5,7 +5,11 @@ services:
       - "3000:3000"  # Internal app port
     environment:
       - NODE_ENV=production
-
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 10s
+      retries: 5
+      start_period: 10s
   nginx:
     image: nginx:latest
     ports:
@@ -16,12 +20,14 @@ services:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
     depends_on:
-      - app  # ✅ nginx starts AFTER the app
+      - app:
+          condition: service_healthy  # ✅ Waits for app to be ready
 
   certbot:
     image: certbot/certbot
+    depends_on:
+      - nginx  # ✅ Certbot starts AFTER nginx
     volumes:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
-    depends_on:
-      - nginx  # ✅ Certbot starts AFTER nginx
+    command: certonly --webroot --webroot-path=/var/www/certbot --email enning@kleinejan.org --agree-tos --no-eff-email --force-renewal -d label-o-matic.kleinejan.org
