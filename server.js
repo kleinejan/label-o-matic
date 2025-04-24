@@ -86,7 +86,8 @@ app.post("/generate", (req, res) => {
         const views = ["top", "front", "perspective"];
         const promises = views.map((view, index) => {
             const outputFile = path.join(tempDir, `output_${view}_${timestamp}.png`);
-            const command = `xvfb-run --auto-servernum --server-args="-screen 0 1024x768x24"  openscad --imgsize=${imgSize},${imgSize} -D mode=${index + 1} -o ${outputFile} ${scadFile}`;
+            // const command = `xvfb-run --auto-servernum --server-args="-screen 0 1024x768x24"  openscad --imgsize=${imgSize},${imgSize} -D mode=${index + 1} -o ${outputFile} ${scadFile}`;
+            const command = `openscad --imgsize=${imgSize},${imgSize} -D mode=${index + 1} -o ${outputFile} ${scadFile}`;
             return new Promise((resolve, reject) => {
                 exec(command, (error) => {
                     if (error) return reject(`Failed to generate ${view} view.`);

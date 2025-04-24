@@ -412,7 +412,7 @@ details {
     padding-block-end: 1rem;
     display: grid;
     grid-template-areas: "label" "input" "hint";
-    gap: .75rem;
+    gap: .15rem;
 
     label {
         grid-area: label;
@@ -431,7 +431,8 @@ details {
 .jan {
     display: grid;
     grid-template-areas: "width height" "thickness corner";
-    gap: var(--grid-gap);
+    /*gap: var(--grid-gap);*/
+    gap: 5px;
     align-items: baseline;
     margin: 0;
     padding: 0;
